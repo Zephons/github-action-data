@@ -3,12 +3,11 @@ on:
   push:
     branches: [ main ]
 jobs:
-
   build:
     runs-on: ubuntu-latest
     steps:
 
-      - name: Check Out Repo 
+      - name: Check Out Repo
         uses: actions/checkout@v2
 
       - name: Login to Docker Hub
@@ -20,11 +19,11 @@ jobs:
       - name: Set up Docker Buildx
         id: buildx
         uses: docker/setup-buildx-action@v1
-      
+
       - name: Set outputs
         id: vars
         run: echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
-        
+
       - name: Check outputs
         run: echo ${{ steps.vars.outputs.sha_short }}
 
@@ -39,4 +38,3 @@ jobs:
 
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
-    
