@@ -2,6 +2,7 @@ name: CI to Docker Hub
 on:
   push:
     branches: [ main ]
+  pull_request:
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -48,4 +49,4 @@ jobs:
           curl -H "Authorization: token ${{ secrets.WF_TOKEN }}" \
           -H 'Accept: application/vnd.github.everest-preview+json' \
           "https://api.github.com/repos/Zephons/github-action-train/dispatches" \
-          -d '{"event_type": "new_dataset_${{ steps.vars.outputs.sha_short }}", "client_payload": {"dataset_commit_id": "${{ steps.vars.outputs.sha_short }}"}}'
+          -d '{"event_type": "new_data_${{ steps.vars.outputs.sha_short }}", "client_payload": {"data_commit_id": "${{ steps.vars.outputs.sha_short }}"}}'
